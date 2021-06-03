@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+	<!-- Made June 10th, 2020 by Collin Barker, 97Cweb -->
+	<!-- Must be run on server opened to index location. Use command prompt to get to file folder containing index. Then start up python server -->
+	<!-- python -m http.server -->
+	<!-- https://weatherwidget.io/ -->
+	<!-- dateTime from https://www.w3schools.com/js/tryit.asp?filename=tryjs_timing_clock -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			var folder = "slides/";
+			var href=window.location.href;
+			var pathArray=href.split('/');
+			var path="";
+			var activated=false;
+			for(i=0;i<pathArray.length-1;i++){
+				path+=pathArray[i];
+				path+="/";
+			};
+			path+=folder;
+			console.log(path);
+			
+			$.ajax({
+				url : path,
+				async: false,
+				success: function (data) {
+					
+				
+					$(data).find("a").attr("href", function (i, val) {
+						if( val.match(/\.(jpg|jpe?g|png|PNG|gif|JPG)$/) ) { 
+							var output="<div class=\"carousel-item";
+							if(!activated){
+								output+=" active";
+								activated=true;
+							}
+							output+="\"> <img class=\"d-block w-100\" src=\""+ path + val +"\"></div>";
+							console.log(output);
+							$("#slide-container").append( output );
+						} 
+					});
+				}
+			});
+			
+			var now = new Date();
+			var night = new Date(
+				now.getFullYear(),
+				now.getMonth(),
+				now.getDate() + 1, // the next day, ...
+				0, 0, 0 // ...at 00:00:00 hours	
+		);
+			// var msTillMidnight = night.getTime() - now.getTime();
+			var testTime = 7200000;
+			
+			// console.log(msTillMidnight);
+			// setTimeout('location.reload()', msTillMidnight);
+			
+			console.log(testTime);
+			setTimeout('location.reload()', testTime);
+			
+		});
+	</script>
+
+	<script>
+	function startTime() {
+	  var today = new Date();
+	  var y = today.getFullYear();
+	  var mo = today.getMonth();
+	  var d = today.getDate();
+	  var h = today.getHours();
+	  var m = today.getMinutes();
+	  var s = today.getSeconds();
+	  mo=checkTime(mo+1);
+	  m = checkTime(m);
+	  s = checkTime(s);
+	  document.getElementById('day').innerHTML = d;
+	  document.getElementById('month-year').innerHTML =  mo + "/" + y;
+	  document.getElementById('clock').innerHTML =  h + ":" + m + ":" + s;
+	  var t = setTimeout(startTime, 500);
+	  
+	  <!-- Background color changing -->
+	  <!-- https://codepen.io/jamesbarnett/pen/kdDBL -->
+	  
+	  if (h > 19 || h <= 6){
+	  // If time is after 7PM or before 6AM, apply night theme to ‘body’
+		document.body.className = "night";
+	  }
+	  else if (h > 6 && h < 9){
+	  // If time is between 6AM – 9AM sunrise theme to ‘body’
+		document.body.className = "sunrise";
+	  }
+	  else{
+	  // Else use ‘day’ theme
+		document.body.className = "daytime";
+	  }
+	}
+	function checkTime(i) {
+	  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+	  return i;
+	}
+	</script>
+	
+	
+	<style>
+		.html, .body, .row, .full-height{
+		  height:100vh;
+		  max-height:100vh;
+		  overflow: hidden;
+		}
+		
+		.bold{
+		  font-weight: bold;
+		}
+		.big{
+		  font-size: 5em;
+		}
+		
+		.centre{
+		  text-align: center;
+		}
+		
+		.carousel-item-next, .carousel-item-prev, .carousel-item.active {
+		  display:block;
+		}
+		.carousel{
+		  padding-top:25px;
+		}
+		
+		.carousel-holder{
+		  height:80vh;
+		}
+				
+		.clock-container{
+		  display:flex;
+		  flex-direction: column;
+		  justify-content: center;
+		  align-items: center;
+		}
+		
+		.daytime { 
+		  background-color:#87ceeb; 
+		  color:black;
+		}
+		.sunrise { 
+		  background-color:#ffca7c; 
+		  color:black;
+		}
+		.night { 
+		  background-color:#223344; 
+		  color:white;
+		}
+		#day{
+		  font-size: 5em;
+		}
+		
+		#month-year, #clock{
+		  font-size: 2em;
+		}
+		.weatherwidget-io{
+		  padding-top:25px;
+		}
+		
+		.flexible{
+		  display: flex;
+		  flex-direction: column;
+		}
+		.logo{
+			background-color:#011460;
+			flex-grow: 1;
+			max-width:100%;
+			max-height: 30vh;
+		    background-image: url("logo.png");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+		}
+		
+		
+		
+	</style>	
+	
+    <title>Test</title>
+  </head>
+  <body  onload="startTime()">
+  	<!-- Page stuff goes here -->
+		
+		
+		<main class="col-12 " role="main">
+			<div class="row ">
+				<div class="col-4 full-height flexible">
+					<div class="clock-container">
+						<div id="day"></div>
+						<div id="month-year"></div>
+						<div id="clock"></div>
+					</div>
+					
+					<a class="weatherwidget-io" href="https://forecast7.com/en/42d31n83d04/windsor/" data-label_1="WINDSOR" data-label_2="WEATHER" data-days="3" data-theme="original" >WINDSOR WEATHER</a>
+					<script>
+					!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+					</script>
+					
+					<style>.embed-container {  position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style>
+
+					<div class="embed-container" id="rss-container" >
+						<!-- https://surfing-waves.com/feed.htm -->
+						<!-- start sw-rss-feed code --> 
+						<script type="text/javascript"> 
+						<!-- 
+						rssfeed_url = new Array(); 
+						rssfeed_url[0]="https://rss.cbc.ca/lineup/canada-windsor.xml"; rssfeed_url[1]="https://rss.cbc.ca/lineup/topstories.xml";  
+						rssfeed_frame_width="350"; 
+						rssfeed_frame_height="800"; 
+						rssfeed_scroll="on"; 
+						rssfeed_scroll_step="6"; 
+						rssfeed_scroll_bar="off"; 
+						rssfeed_target="_blank"; 
+						rssfeed_font_size="15"; 
+						rssfeed_font_face="sans-serif"; 
+						rssfeed_border="off"; 
+						rssfeed_css_url=""; 
+						rssfeed_title="off"; 
+						rssfeed_title_name=""; 
+						rssfeed_title_bgcolor="#3366ff"; 
+						rssfeed_title_color="#fff"; 
+						rssfeed_title_bgimage=""; 
+						rssfeed_footer="off"; 
+						rssfeed_footer_name="rss feed"; 
+						rssfeed_footer_bgcolor="#fff"; 
+						rssfeed_footer_color="#333"; 
+						rssfeed_footer_bgimage=""; 
+						rssfeed_item_title_length="1000"; 
+						rssfeed_item_title_color="#666"; 
+						rssfeed_item_bgcolor="#fff"; 
+						rssfeed_item_bgimage=""; 
+						rssfeed_item_border_bottom="on"; 
+						rssfeed_item_source_icon="off"; 
+						rssfeed_item_date="off"; 
+						rssfeed_item_description="on"; 
+						rssfeed_item_description_length="120"; 
+						rssfeed_item_description_color="#666"; 
+						rssfeed_item_description_link_color="#666"; 
+						rssfeed_item_description_tag="off"; 
+						rssfeed_no_items="0"; 
+						rssfeed_cache = "6ccb49916f5945d66dbc7c076f2d378d"; 
+						//--> 
+						</script> 
+						<script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script> 
+						<!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. --> 
+						<div style="color:#ccc;font-size:10px; text-align:right; width:350px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div> 
+						<!-- end sw-rss-feed code -->					
+					</div>
+
+					<div class="logo"></div>
+					
+					
+					
+					
+					<!-- Edite theline below-->
+					
+					<div class="h2 bold centre"> Some Minitext </div>
+				</div>
+				
+				<div class="col-8 full-height flexible">
+					<div class="h1 bold big centre">Welcome to Wherever</div>
+					<div class "carousel-holder">
+						<div id="carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner" id="slide-container">
+								
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</main>	
+	
+    <!-- End of page stuff -->
+	
+	
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
