@@ -9,10 +9,14 @@ Supported extensions for slides are jpg, png, gif. Easy to add others that are s
 
 
 logo.png - logo added to bottom left, below news
-rss feed - configurable source, uses surfing waves: https://surfing-waves.com/feed.htm MUST BE CONFIGURED ON THEIR SITE DUE TO CACHING REQUIREMENTS
+
+rss feed - configurable source, uses surfing waves: https://surfing-waves.com/feed.htm **MUST BE CONFIGURED ON THEIR SITE DUE TO CACHING REQUIREMENTS**
+Any rss feed can be dropped in, its on the internet. This is just the easiest to use I found
+
 weather  - configurable source, uses forecast7: https://forecast7.com/en/42d31n83d04/windsor/
 
-Note: I am not responsible for their content, if theirs breaks, this will also
+
+*Note: I am not responsible for their content, if theirs breaks, this will also*
 
 ![lobbyScreen](https://i.imgur.com/mMNvqJ9.png)
 
