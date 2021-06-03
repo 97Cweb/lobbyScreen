@@ -14,7 +14,7 @@ weather  - configurable source, uses forecast7: https://forecast7.com/en/42d31n8
 
 Note: I am not responsible for their content, if theirs breaks, this will also
 
-https://i.imgur.com/mMNvqJ9.png
+![lobbyScreen](https://i.imgur.com/mMNvqJ9.png)
 
 # Basic setup (windows)
 1. Have python installed, including path access (checkbox at bottom of Python installer)
