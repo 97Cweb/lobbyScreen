@@ -33,3 +33,15 @@ This is useful for your actual install for your TV. Recommend getting something 
     ```
     where the /home/pi/Desktop/screen is the path to the fold holding the git contents. For further instructions, look this up. Messing up in here is a great way to really break your pi. 
 5. Enable start on boot for your browser. This is different and changes per Pi version, so look this up also. The url will still be http://localhost:8000/
+
+# Troubleshooting
+It should be functional, but there are multiple ways it can go wrong
+1. Q: Takes too long to load/does nothing
+   A: Reduce the number of pictures in the folder
+2. Q: Component not showing up
+   A: Check changes you made, odds are something is mispelt.
+3. Q: Wrong weather location
+   A: Change it in the index file. Uses special link. Search google for "forecast7.com <town name>" to find the correct one
+
+Please check the errors thrown by your browser before asking questions.
+Thank you
