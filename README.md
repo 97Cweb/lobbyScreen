@@ -1,7 +1,10 @@
 # lobbyScreen
 A simple lobby screen index that can be hosted on a simple python server using a Raspberry Pi. Any pictures in the folder get added to the screen on next refresh
+
 Background will change colours based on time, from a blue, to a black, to a sunrise. 
+
 Supported extensions for slides are jpg, png, gif. Easy to add others that are supported by browsers
+
 
 logo.png - logo added to bottom left, below news
 rss feed - configurable source, uses surfing waves: https://surfing-waves.com/feed.htm 
@@ -44,4 +47,5 @@ It should be functional, but there are multiple ways it can go wrong
    A: Change it in the index file. Uses special link. Search google for "forecast7.com <town name>" to find the correct one
 
 Please check the errors thrown by your browser before asking questions.
+    
 Thank you
